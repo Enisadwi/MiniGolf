@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.EventSystems;
 
-public class BallControler : MonoBehaviour
+public class BallControler : MonoBehaviour, IPointerDownHandler
 {
   [SerializeField] Collider col;
   [SerializeField] Rigidbody rb;
@@ -11,14 +12,7 @@ public class BallControler : MonoBehaviour
   bool shoot;
 
   private void Update(){
-    if (Input.GetMouseButtonDown(0))
-    {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out var hitInfo) && hitInfo.collider == col)
-        {
-         shoot = true;
-        }
-    }
+    
   }
 
   private void FixedUpdate(){
@@ -38,6 +32,11 @@ public class BallControler : MonoBehaviour
   public bool IsMove()
   {
     return rb.velocity != Vector3.zero;
+  }
+
+  void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
+  {
+    shoot = true;
   }
 }
 
