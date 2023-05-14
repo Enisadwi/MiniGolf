@@ -7,7 +7,9 @@ public class PlayManager : MonoBehaviour
    [SerializeField] BallControler ballControler;
    [SerializeField] CameraController camController;
    bool isBallOutSide;
+   bool isGoal;
    bool isBallTeleporting;
+ 
    Vector3 lastBallPosition;
 
    public void Update(){
@@ -23,8 +25,18 @@ public class PlayManager : MonoBehaviour
 
     camController.SetInputActive(inputActive);
    }
-   public void OnBallOutSide()
+   public void OnBallGoalEnter()
    {
+      isGoal=true;
+      ballControler.enabled = false;
+      // TODO PLAYER WIN WINDOW POPUP
+   }
+
+      public void OnBallOutSide()
+   {
+      if (isGoal)
+      return;
+
       if(isBallTeleporting == false)
       Invoke("TeleportBallLastPosition", 3);
 
