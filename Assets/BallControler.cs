@@ -30,16 +30,17 @@ public class BallControler : MonoBehaviour, IPointerDownHandler
     }
     else if (Input.GetMouseButton(0))
     {
-      var mouseViewportPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-      var ballViewportPos =  Camera.main.WorldToViewportPoint(this.transform.position);
-      var pointerDirection = ballViewportPos - mouseViewportPos;
-      pointerDirection.z = 0;
-
       ray = Camera.main.ScreenPointToRay(Input.mousePosition);
       plane.Raycast(ray,out var distance);
       forceDirection = (this.transform.position - ray.GetPoint(distance));
       forceDirection.Normalize();
 
+       var mouseViewportPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+      var ballViewportPos =  Camera.main.WorldToViewportPoint(this.transform.position);
+      var pointerDirection = ballViewportPos - mouseViewportPos;
+      pointerDirection.z = 0;
+      pointerDirection.z *= Camera.main.aspect;
+      pointerDirection.z = Mathf.Clamp(pointerDirection.z, -0.5f, 0.5f);
       forceFactor = pointerDirection.magnitude * 2;
 
       aimWorld.transform.position = this.transform.position;
@@ -54,6 +55,7 @@ public class BallControler : MonoBehaviour, IPointerDownHandler
         Camera.main.ScreenToWorldPoint(ballScreenPos),
         Camera.main.ScreenToWorldPoint(mouseScreenPos)};
         aimLine.SetPositions(positions);
+        aimLine.endColor = Color.Lerp(Color.blue, Color.red, forceFactor);
 
     }
     else if (Input.GetMouseButtonUp(0))
