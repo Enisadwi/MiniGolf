@@ -46,7 +46,7 @@ public class BallControler : MonoBehaviour, IPointerDownHandler
       forceDirection.Normalize();
 
       forceFactor = pointerDirection.magnitude * 2;
-      Debug.Log(forceFactor);
+     
 
       aimWorld.transform.position = this.transform.position;
       aimWorld.forward = forceDirection;
@@ -80,6 +80,9 @@ public class BallControler : MonoBehaviour, IPointerDownHandler
 
   void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
   {
+    if(this.IsMove())
+    return;
+
     shootingMode = true;
   }
 }
