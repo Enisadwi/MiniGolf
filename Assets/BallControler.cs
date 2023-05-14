@@ -47,12 +47,12 @@ public class BallControler : MonoBehaviour, IPointerDownHandler
       aimWorld.localScale = new Vector3(1, 1, 0.5f + forceFactor);
 
       var ballScreenPos =  Camera.main.WorldToScreenPoint(this.transform.position);
-      var mouseScreenPos = input.mousePosition;
-      ballScreenPos.z = 1;
-      mouseScreenPos.z = 1;
+      var mouseScreenPos = Input.mousePosition;
+      ballScreenPos.z = 1f;
+      mouseScreenPos.z = 1f;
       var positions = new Vector3[]{
-        Camera.main.WorldToScreenPoint(ballScreenPos),
-        Camera.main.WorldToScreenPoint(mouseScreenPos)};
+        Camera.main.ScreenToWorldPoint(ballScreenPos),
+        Camera.main.ScreenToWorldPoint(mouseScreenPos)};
         aimLine.SetPositions(positions);
 
     }
