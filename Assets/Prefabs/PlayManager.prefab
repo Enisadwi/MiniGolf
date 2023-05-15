@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6738215117431755082}
   - component: {fileID: 6738215117431755083}
+  - component: {fileID: 9111626558483985680}
   m_Layer: 0
   m_Name: PlayManager
   m_TagString: Untagged
@@ -41,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6738215117431755084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf13fafc0309ba84292b443908ee3a70, type: 3}
+  m_Script: {fileID: 11500000, guid: b472ad0ec9af7a4449d9ea36459e9486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ballControler: {fileID: 0}
@@ -49,3 +50,15 @@ MonoBehaviour:
   finishWindow: {fileID: 0}
   finishText: {fileID: 0}
   shootCountText: {fileID: 0}
+--- !u!114 &9111626558483985680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6738215117431755084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 769a27d9ba6425c45bddc629b7ff2382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

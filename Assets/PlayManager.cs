@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -14,6 +14,7 @@ public class PlayManager : MonoBehaviour
    bool isBallOutSide;
    bool isGoal;
    bool isBallTeleporting;
+ 
    Vector3 lastBallPosition;
 
    private void OnEnable(){
@@ -40,7 +41,8 @@ public class PlayManager : MonoBehaviour
    {
       isGoal=true;
       ballControler.enabled = false;
-
+      // TODO PLAYER WIN WINDOW POPUP
+   
       finishWindow.gameObject.SetActive(true);
       finishText.text ="Finished!! \n" + "Shoot Count: "+ ballControler.ShootCount;
    }
@@ -63,6 +65,8 @@ public class PlayManager : MonoBehaviour
       TeleportBall(lastBallPosition);
    }
 
+
+      
    public void TeleportBall(Vector3 targetPosition)
    {
       var rb = ballControler.GetComponent<Rigidbody>();
