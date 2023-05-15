@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class BallControler : MonoBehaviour, IPointerDownHandler
 {
@@ -17,11 +18,18 @@ public class BallControler : MonoBehaviour, IPointerDownHandler
   Vector3 forceDirection;
   Ray ray;
   Plane plane;
+
+  int shootCount;
+
   public bool  ShootingMode {get => shootingMode;}
+  public int ShootCount {get => shootCount;}
 
-
+  public UnityEvent<int> onBallShooted = new UnityEvent<int>();
+  
   private void Update()
   {
+    if (ShootingMode)
+    {
     if (Input.GetMouseButtonDown(0))
     {
       aimLine.gameObject.SetActive(true);
@@ -65,14 +73,17 @@ public class BallControler : MonoBehaviour, IPointerDownHandler
       aimLine.gameObject.SetActive(false);
       aimWorld.gameObject.SetActive(false);
     }
-  }
+  }}
 
   private void FixedUpdate(){
     if (shoot)
     { 
         shoot = false;
         rb.AddForce(forceDirection * force * forceFactor, ForceMode.Impulse);
+        shootCount += 1; 
+        onBallShooted.Invoke(shootCount);
     }
+
     if(rb.velocity.sqrMagnitude < 0.01f && rb.velocity.sqrMagnitude >0)
     {
       rb.velocity = Vector3.zero;
